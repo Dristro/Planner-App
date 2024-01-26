@@ -90,4 +90,7 @@ public class LoginController {
         //Showing the dashboard window
         sceneManager.showCreateAccount();
     }
+
+    // Comment after the first commit onto git
+
 }
