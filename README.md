@@ -11,8 +11,12 @@ store user data.
 
 <br>
 
-**More functionality to be added to the application such as:**
+**Run the App.java file to run the application in a code editor.**
+**It's placed at: "src/main/java/com.plannerapp.plannerapp/App.java"**
 
+<br>
+
+**More functionality to be added to the application such as:**
 - Profile View
 - Planner View
 - Automated Task Scheduler
