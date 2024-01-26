@@ -1,0 +1,132 @@
+.left_menu_container{
+    -fx-background-color: linear-gradient(to bottom , #296978, #1198b6);
+    -fx-spacing: 20;
+    -fx-padding: 30;
+
+}
+.left_menu_container Button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+    /*-fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
+}
+
+.left_menu_logout_container{
+    -fx-background-color: #1198b6;
+    -fx-spacing: 20;
+    -fx-padding: 30;
+}
+.left_menu_logout_container Button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #c7382d;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+    /* -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
+}
+.edit_tasks_container{
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 20;
+    -fx-padding: 30;
+    -fx-alignment: center;
+}
+.edit_tasks_complete_button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #7ec700;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+}
+.edit_tasks_edit_button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #f9ca3d;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+}
+.edit_tasks_delete_button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #c7382d;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+}
+.main{
+    -fx-background-color: linear-gradient(to bottom , #296978, #1198b6);
+}
+
+.current_task_container{
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+.current_task_container Label{
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.6em;
+}
+.current_task_container ListView{
+    -fx-background-color: #EEEEEE;
+}
+
+.header_container{
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 350;
+}
+.header_container_welcome{
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.6em;
+    -fx-pref-width: 230;
+}
+.header_container_date{
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.6em;
+    -fx-pref-width: 140;
+    -fx-alignment: center;
+}
+
+.today_task_container{
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: center;
+}
+.today_task_container Label{
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.6em;
+}
+.today_task_container ListView{
+    -fx-background-color: #EEEEEE;
+}
+
+.add_task_container{
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+.add_task_container Label{
+    -fx-font-size: 1.6em;
+}
+.add_task_container Button{
+    -fx-background-color: #1198b6;
+    -fx-text-fill: #FFFFFF;
+}
+
+.logo_container{
+    -fx-background-color: #FFFFFF;
+}
+.logo_container VBox{
+    -fx-alignment: center;
+}
+.logo_container FontAwesomeIconView{
+    -fx-fill: #1198b6;
+}
+.logo_container Label{
+    -fx-text-fill: #FF0000;
+    -fx-alignment: center;
+    -fx-pref-width: 140;
+}

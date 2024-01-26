@@ -1,0 +1,176 @@
+.left_menu_container{
+    -fx-background-color: linear-gradient(to bottom , #296978, #1198b6);
+    -fx-spacing: 20;
+    -fx-padding: 30;
+
+}
+.left_menu_container Button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+    /*-fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
+}
+
+.left_menu_logout_container{
+    -fx-background-color: #1198b6;
+    -fx-spacing: 20;
+    -fx-padding: 30;
+}
+.left_menu_logout_container Button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #c7382d;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+    /* -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
+}
+
+.task_main_window{
+    -fx-background-color: linear-gradient(to bottom , #296978, #1198b6);
+}
+.task_main_window FontAwesomeIconView{
+    -fx-fill: #1198b6;
+}
+
+.header_container{
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 350;
+}
+.header_container_welcome{
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.6em;
+    -fx-pref-width: 230;
+}
+.header_container_date{
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.6em;
+    -fx-pref-width: 140;
+    -fx-alignment: center;
+}
+
+.add_task_container{
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+.add_task_container_lbl{
+    -fx-font-size: 1.6em;
+}
+.active_tasks_container_error_lbl{
+    -fx-text-fill: #FF0000;
+    -fx-alignment: center;
+    -fx-pref-width: 140;
+}
+.add_task_container Button{
+    -fx-background-color: #1198b6;
+    -fx-text-fill: #FFFFFF;
+}
+
+.complete_task_container{
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+.complete_task_container Label{
+    -fx-font-size: 1.6em;
+    -fx-text-fill: #000000;
+}
+.complete_task_container ListView{
+    -fx-pref-width: 315;
+    -fx-pref-height: 150;
+    -fx-alignment: center;
+}
+.complete_task_container HBox{
+    -fx-alignment: center;
+    -fx-spacing: 20;
+    -fx-pref-height: 40;
+    -fx-pref-width: 315;
+}
+.complete_task_container_activate{
+    -fx-background-color: #1198b6;
+    -fx-pref-width: 80;
+    -fx-pref-height: 30;
+    -fx-text-fill: #FFFFFF;
+}
+.complete_task_container_delete{
+    -fx-background-color: #c7382d;
+    -fx-pref-width: 80;
+    -fx-pref-height: 30;
+    -fx-text-fill: #FFFFFF;
+}
+
+.active_tasks_container{
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+.active_tasks_container Label{
+    -fx-font-size: 1.6em;
+    -fx-text-fill: #000000;
+}
+.active_tasks_container ListView{
+    -fx-pref-width: 315;
+    -fx-pref-height: 150;
+    -fx-alignment: center;
+}
+.active_tasks_container HBox{
+    -fx-alignment: center;
+    -fx-spacing: 20;
+    -fx-pref-height: 40;
+    -fx-pref-width: 315;
+}
+.active_tasks_container_complete{
+    -fx-background-color: #1198b6;
+    -fx-pref-width: 80;
+    -fx-pref-height: 30;
+    -fx-text-fill: #FFFFFF;
+}
+.active_tasks_container_edit{
+    -fx-background-color: #1198b6;
+    -fx-pref-width: 80;
+    -fx-pref-height: 30;
+    -fx-text-fill: #FFFFFF;
+}
+.active_tasks_container_delete{
+    -fx-background-color: #c7382d;
+    -fx-pref-width: 80;
+    -fx-pref-height: 30;
+    -fx-text-fill: #FFFFFF;
+}
+
+.recently_deleted_container{
+    -fx-background-color: #FFFFFF;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+.recently_deleted_container Label{
+    -fx-font-size: 1.6em;
+    -fx-text-fill: #000000;
+}
+.recently_deleted_container ListView{
+    -fx-pref-width: 315;
+    -fx-pref-height: 150;
+    -fx-alignment: center;
+}
+.recently_deleted_container HBox{
+    -fx-alignment: center;
+    -fx-spacing: 20;
+    -fx-pref-height: 40;
+    -fx-pref-width: 315;
+}
+.recently_deleted_container_recover{
+    -fx-background-color: #1198b6;
+    -fx-pref-width: 80;
+    -fx-pref-height: 30;
+    -fx-text-fill: #FFFFFF;
+}
+.recently_deleted_container_perm_delete{
+    -fx-background-color: #c7382d;
+    -fx-pref-width: 140;
+    -fx-pref-height: 30;
+    -fx-text-fill: #FFFFFF;
+}
