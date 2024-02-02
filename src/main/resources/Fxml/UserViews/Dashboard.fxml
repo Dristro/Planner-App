@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="main_background" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.DashboardController">
    <VBox layoutX="57.0" layoutY="85.0" prefHeight="500.0" prefWidth="170.0" styleClass="left_menu_container" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
       <Button fx:id="dashboard_btn" mnemonicParsing="false" text="Dashboard" />
       <Button fx:id="tasks_btn" mnemonicParsing="false" onAction="#onTasks" text="Tasks" />

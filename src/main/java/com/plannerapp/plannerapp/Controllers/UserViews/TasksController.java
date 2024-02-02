@@ -296,9 +296,26 @@ public class TasksController implements Initializable {
     public void onDelete_recently_deleted_task(ActionEvent event){
         // First call the method below
         // Then run the populate_recently_deleted listview method
+        delete_recently_deleted_task(header_username, recently_deleted_listView.getSelectionModel().getSelectedItem().toString());
+        populate_deleted_tasks(header_username);
     }
     private void delete_recently_deleted_task(String username, String taskName){
         // Add the code for accessing the DB and deleting the task from the Recently_Deleted table
+        try {
+            Connection conn = establishConnection();
+            String deleteQuery = "DELETE FROM Recently_Deleted_Tasks WHERE Username = ? AND Task_name = ?";
+            try(PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery)){
+                deleteStatement.setString(1, username);
+                deleteStatement.setString(2, taskName);
+                deleteStatement.executeUpdate();
+
+                    // if()
+                } catch (Exception e){
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

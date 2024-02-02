@@ -47,7 +47,7 @@
          <ListView fx:id="recently_deleted_listView" prefHeight="150.0" prefWidth="200.0" />
          <HBox prefHeight="50.0" prefWidth="200.0">
             <Button fx:id="recover_recently_btn" mnemonicParsing="false" styleClass="recently_deleted_container_recover" text="Recover" />
-            <Button fx:id="delete_recently_btn" mnemonicParsing="false" styleClass="recently_deleted_container_perm_delete" text="Delete  permanently" />
+            <Button fx:id="delete_recently_btn" mnemonicParsing="false" onAction="#onDelete_recently_deleted_task" styleClass="recently_deleted_container_perm_delete" text="Delete  permanently" />
          </HBox>
       </VBox>
       <VBox fillWidth="false" layoutX="337.0" layoutY="315.0" prefHeight="245.0" prefWidth="335.0" styleClass="add_task_container" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
