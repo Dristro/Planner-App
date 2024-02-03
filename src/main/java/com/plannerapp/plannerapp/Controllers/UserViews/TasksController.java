@@ -4,6 +4,7 @@ import com.plannerapp.plannerapp.Scenes.SceneManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -48,10 +49,12 @@ public class TasksController implements Initializable {
         //populate_Tasks_List(header_username);
 
         // Disable the Delete, ... Buttons in the start, so they can only be pressed upon task selection
-        complete_active_btn.setDisable(true);
-        edit_active_btn.setDisable(true);
-        delete_active_btn.setDisable(true);
+        //complete_active_btn.setDisable(true);
+        //edit_active_btn.setDisable(true);
+        //delete_active_btn.setDisable(true);
     }
+
+    // Various methods for window
 
     //Methods for opening various windows
     public void openDashboard(){
@@ -100,74 +103,11 @@ public class TasksController implements Initializable {
         date_lbl.setText("12/01/2024");
         this.header_username = username;
     }
-    //                                                                                   Add task section              ************************************************************
-
-    // Setting up the add task part of the window
     private Connection establishConnection() throws SQLException {
         return DriverManager.getConnection(DATABASE_URL);
     }
-    // Adding tasks
-    // Getting task data from the user prompt
-    public void getTaskData(){
-        // Set these values into the DB
-        try {
-            String taskName = add_task_fld.getText();
-            String taskDescription = add_task_description.getText();
-            LocalDate selectedDate = add_task_date.getValue();
-            String taskDate = selectedDate.toString();
-            if(taskName.isBlank() || taskName.isEmpty())
-            {
-                error_lbl.setText("Invalid Task Name");
-                error_lbl.setVisible(true);
-            }
-            else {
-                addTask(taskName, taskDescription, taskDate);
-            }
-        } catch (Exception e){
-            //e.printStackTrace();
-            error_lbl.setText("Invalid input");
-            error_lbl.setVisible(true);
-        }
 
-    }
-    // Adding the task to the DB
-    public void addTask(String taskName, String taskDescription, String taskDate){
-        try(Connection conn = establishConnection()){
-
-            String insertSql = "INSERT INTO Tasks (Username, Task, \"Task Description\", \"Task Aim Date\", \"Task Completed Date\") VALUES (?, ?, ?, ?, ?)";
-            String taskCompleteDateDefault = "";
-            try(PreparedStatement preparedStatement = conn.prepareStatement(insertSql)){
-
-                preparedStatement.setString(1, header_username.trim());         // Adding to DB - Username
-                preparedStatement.setString(2, taskName.trim());                // Adding to DB - Task name
-                preparedStatement.setString(3, taskDescription.trim());         // Adding to DB - Task Description
-                preparedStatement.setString(4, taskDate.trim());                // Adding to DB - Task Aim Date
-                preparedStatement.setString(5, taskCompleteDateDefault.trim()); // Adding to DB - Task Complete Date
-
-                int rowsEffected = preparedStatement.executeUpdate();
-                if(rowsEffected>0){
-                    add_task_fld.setText("");
-                    add_task_description.setText("");
-                    add_task_date.setValue(null);
-                    populate_Tasks_List(header_username);
-                    error_lbl.setVisible(false);
-                }
-                else{
-                    error_lbl.setText("Error adding task");
-                    error_lbl.setVisible(true);
-                }
-                // Add a error lbl near the add task point to show any kinds of errors in adding the tasks to hte DB.
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-            int error_code = e.getErrorCode();
-            System.out.println("SQLite error code: " + error_code);
-            error_lbl.setText("Error: try again");
-            error_lbl.setVisible(true);
-        }
-    }
-
-    // Showing tasks on the List
+    // Showing tasks on the List                (Populating the various listviews)
     public void populate_Tasks_List (String username){
         try{
             Connection conn = establishConnection();
@@ -232,9 +172,81 @@ public class TasksController implements Initializable {
         }
     }
 
-    //                                                                                   Delete active task section    ************************************************************
+    //                                                                                   Active Tasks Container        ************************************************************
+
+    // Setting up the add task part of the window
+    // Adding tasks
+    // Getting task data from the user prompt
+    public void getTaskData(){
+        // Set these values into the DB
+        try {
+            String taskName = add_task_fld.getText();
+            String taskDescription = add_task_description.getText();
+            LocalDate selectedDate = add_task_date.getValue();
+            String taskDate = selectedDate.toString();
+            if(taskName.isBlank() || taskName.isEmpty())
+            {
+                error_lbl.setText("Invalid Task Name");
+                error_lbl.setVisible(true);
+            }
+            else {
+                addTask(taskName, taskDescription, taskDate);
+            }
+        } catch (Exception e){
+            //e.printStackTrace();
+            error_lbl.setText("Invalid input");
+            error_lbl.setVisible(true);
+        }
+
+    }
+    // Adding the task to the "Tasks" table
+    public void addTask(String taskName, String taskDescription, String taskDate){
+        try(Connection conn = establishConnection()){
+
+            String insertSql = "INSERT INTO Tasks (Username, Task, \"Task Description\", \"Task Aim Date\", \"Task Completed Date\") VALUES (?, ?, ?, ?, ?)";
+            String taskCompleteDateDefault = "";
+            try(PreparedStatement preparedStatement = conn.prepareStatement(insertSql)){
+
+                preparedStatement.setString(1, header_username.trim());         // Adding to DB - Username
+                preparedStatement.setString(2, taskName.trim());                // Adding to DB - Task name
+                preparedStatement.setString(3, taskDescription.trim());         // Adding to DB - Task Description
+                preparedStatement.setString(4, taskDate.trim());                // Adding to DB - Task Aim Date
+                preparedStatement.setString(5, taskCompleteDateDefault.trim()); // Adding to DB - Task Complete Date
+
+                int rowsEffected = preparedStatement.executeUpdate();
+                if(rowsEffected>0){
+                    add_task_fld.setText("");
+                    add_task_description.setText("");
+                    add_task_date.setValue(null);
+                    populate_Tasks_List(header_username);
+                    error_lbl.setVisible(false);
+                }
+                else{
+                    error_lbl.setText("Error adding task");
+                    error_lbl.setVisible(true);
+                }
+                // Add a error lbl near the add task point to show any kinds of errors in adding the tasks to hte DB.
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+            int error_code = e.getErrorCode();
+            System.out.println("SQLite error code: " + error_code);
+            error_lbl.setText("Error: try again");
+            error_lbl.setVisible(true);
+        }
+    }
+
+    // Editing a selected active Task
+    public void onEdit_active_task(ActionEvent event){
+        edit_active_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
+
+    }
+    public void edit_active_task(String username, String taskName){
+
+    }
+
     // Deletes and moves active tasks to the deleted table
-    public void selected_tasks(){
+    /*public void selected_tasks(){
         active_tasks_listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!=null){
                 complete_active_btn.setDisable(false);          // Enable the buttons if selected
@@ -246,7 +258,7 @@ public class TasksController implements Initializable {
                 delete_active_btn.setDisable(true);
             }
         });
-    }
+    }*/
     public void onDelete_active_task(ActionEvent event){
         delete_active_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
         populate_deleted_tasks(header_username);
@@ -310,9 +322,8 @@ public class TasksController implements Initializable {
         }
     }
 
-
-
-    //                                                                                   Delete recently deleted task  ************************************************************
+    //                                                                                   Deleted Tasks Container       ************************************************************
+    // Perm deletes the task
     public void onDelete_recently_deleted_task(ActionEvent event){
         // First call the method below
         // Then run the populate_recently_deleted listview method
@@ -338,8 +349,7 @@ public class TasksController implements Initializable {
         }
     }
 
-
-    //                                                                                   Recover recently deleted task ************************************************************
+    // Deletes the task from the recently deleted table and moves it to the active tasks table
     public void onRecover_recently_deleted_task(ActionEvent event){
         recover_recently_deleted_task(header_username, recently_deleted_listView.getSelectionModel().getSelectedItem().toString());
         populate_deleted_tasks(header_username);
@@ -428,4 +438,94 @@ public class TasksController implements Initializable {
         }
     }
 
+
+    public void onDelete_completed_task(ActionEvent event){
+        delete_completed_task(header_username, completed_tasks_listView.getSelectionModel().getSelectedItem().toString());
+        populate_completed_list(header_username);
+        populate_deleted_tasks(header_username);
+    }
+    public void delete_completed_task(String username, String taskName){
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT * FROM Completed_Tasks Where Username = ? AND Task_Name = ?";
+            String insertQuery = "INSERT INTO Recently_Deleted_Tasks (Username, Task_Name, Task_Description, Task_Aim_Date, Task_Completed_Date) VALUES (?, ?, ?, ?, ?)";
+            String deleteQuery = "DELETE FROM Completed_Tasks Where Username = ? AND Task_Name = ?";
+
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery);
+                PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+                PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery)){
+
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, taskName);
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    if(resultSet.next()){
+                        insertStatement.setString(1, resultSet.getString("Username"));
+                        insertStatement.setString(2, resultSet.getString("Task_Name"));
+                        insertStatement.setString(3, resultSet.getString("Task_Description"));
+                        insertStatement.setString(4, resultSet.getString("Task_Aim_Date"));
+                        insertStatement.setString(5, resultSet.getString("Task_Completed_Date"));
+
+                        int rowsEffected = insertStatement.executeUpdate();
+                        if(rowsEffected > 0){
+                            deleteStatement.setString(1, username);
+                            deleteStatement.setString(2, taskName);
+                            deleteStatement.executeUpdate();
+                        }
+                    }
+                }
+            }
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public void onActivate_Completed_Tasks(ActionEvent event){
+        activate_completed_tasks(header_username, completed_tasks_listView.getSelectionModel().getSelectedItem().toString());
+        populate_completed_list(header_username);
+        populate_Tasks_List(header_username);
+    }
+    public void activate_completed_tasks(String username, String taskName){
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT * FROM Completed_Tasks WHERE Username = ? AND Task_Name = ?";
+            String insertQuery = "INSERT INTO Tasks (Username, Task, 'Task Description', 'Task Aim Date', 'Task Completed Date') VALUES (?, ?, ?, ?, ?)";
+            String deleteQuery = "DELETE FROM Completed_Tasks WHERE Username = ? AND Task_Name = ?";
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery);
+                PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+                PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);){
+
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, taskName);
+
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    if(resultSet.next()){
+                        insertStatement.setString(1, resultSet.getString("Username"));
+                        insertStatement.setString(2, resultSet.getString("Task_Name"));
+                        insertStatement.setString(3, resultSet.getString("Task_Description"));
+                        insertStatement.setString(4, resultSet.getString("Task_Aim_Date"));
+                        insertStatement.setString(5, resultSet.getString("Task_Completed_Date"));
+
+                        int rowsEffected = insertStatement.executeUpdate();
+                        if(rowsEffected > 0){
+                            deleteStatement.setString(1, username);
+                            deleteStatement.setString(2, taskName);
+                            deleteStatement.executeUpdate();
+                        }
+                    }
+                }
+            }
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    //                                                                                                                 ************************************************************
+    //                                                                                                                 ************************************************************
+    //                                                                                                                 ************************************************************
 }
