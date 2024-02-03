@@ -29,13 +29,13 @@
          <Label text="Completed Tasks" />
          <ListView fx:id="completed_tasks_listView" prefHeight="150.0" prefWidth="200.0" />
          <HBox fillHeight="false" prefHeight="50.0" prefWidth="200.0">
-            <Button fx:id="completed_activate_btn" mnemonicParsing="false" styleClass="complete_task_container_activate" text="Activate" />
-            <Button fx:id="delete_completed_btn" mnemonicParsing="false" styleClass="complete_task_container_delete" text="Delete" />
+            <Button fx:id="completed_activate_btn" mnemonicParsing="false" onAction="#onActivate_Completed_Tasks" styleClass="complete_task_container_activate" text="Activate" />
+            <Button fx:id="delete_completed_btn" mnemonicParsing="false" onAction="#onDelete_completed_task" styleClass="complete_task_container_delete" text="Delete" />
          </HBox>
       </VBox>
       <VBox fillWidth="false" layoutX="360.0" layoutY="70.0" prefHeight="245.0" prefWidth="335.0" styleClass="active_tasks_container" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
          <Label text="Active Tasks" />
-         <ListView fx:id="active_tasks_listView" onMouseClicked="#selected_tasks" prefHeight="150.0" prefWidth="200.0" />
+         <ListView fx:id="active_tasks_listView" prefHeight="150.0" prefWidth="200.0" />
          <HBox prefHeight="50.0" prefWidth="200.0">
             <Button fx:id="complete_active_btn" mnemonicParsing="false" onAction="#onCompleted_active_task" styleClass="active_tasks_container_complete" text="Complete" />
             <Button fx:id="edit_active_btn" mnemonicParsing="false" styleClass="active_tasks_container_edit" text="Edit" />
