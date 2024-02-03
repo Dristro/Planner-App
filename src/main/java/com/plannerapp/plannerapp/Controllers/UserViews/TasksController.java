@@ -168,13 +168,13 @@ public class TasksController implements Initializable {
     }
 
     // Showing tasks on the List
-    public void populate_Tasks_List (String header_username){
+    public void populate_Tasks_List (String username){
         try{
             Connection conn = establishConnection();
             String query = "SELECT Task FROM Tasks WHERE Username = ?";
             try(PreparedStatement preparedStatement = conn.prepareStatement(query)){
                 // System.out.println("Header_username: " + header_username);
-                preparedStatement.setString(1, header_username);
+                preparedStatement.setString(1, username);
                 try(ResultSet resultSet = preparedStatement.executeQuery()) {
                     ObservableList<String> data = FXCollections.observableArrayList();
 
@@ -186,6 +186,48 @@ public class TasksController implements Initializable {
                 }
             }
         } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void populate_deleted_tasks(String username){
+        try{
+            Connection conn = establishConnection();
+            String query = "SELECT Task_name FROM Recently_Deleted_Tasks WHERE Username = ?";
+            try(PreparedStatement preparedStatement = conn.prepareStatement(query)){
+                // System.out.println("Header_username: " + header_username);
+                preparedStatement.setString(1, username);
+                try(ResultSet resultSet = preparedStatement.executeQuery()) {
+                    ObservableList<String> data = FXCollections.observableArrayList();
+
+                    while(resultSet.next()){
+                        String value = resultSet.getString("Task_name");
+                        data.add(value);
+                    }
+                    recently_deleted_listView.setItems(data);
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void populate_completed_list(String username){
+        try{
+            Connection conn = establishConnection();
+            String query = "SELECT Task_Name FROM Completed_Tasks WHERE Username = ?";
+
+            try(PreparedStatement preparedStatement = conn.prepareStatement(query)){
+                preparedStatement.setString(1, username);
+                try(ResultSet resultSet = preparedStatement.executeQuery()){
+                    ObservableList<String> data = FXCollections.observableArrayList();
+
+                    while(resultSet.next()){
+                        String value = resultSet.getString("Task_Name");
+                        data.add(value);
+                    }
+                    completed_tasks_listView.setItems(data);
+                }
+            }
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -268,31 +310,9 @@ public class TasksController implements Initializable {
         }
     }
 
-    public void populate_deleted_tasks(String username){
-        try{
-            Connection conn = establishConnection();
-            String query = "SELECT Task_name FROM Recently_Deleted_Tasks WHERE Username = ?";
-            try(PreparedStatement preparedStatement = conn.prepareStatement(query)){
-                // System.out.println("Header_username: " + header_username);
-                preparedStatement.setString(1, username);
-                try(ResultSet resultSet = preparedStatement.executeQuery()) {
-                    ObservableList<String> data = FXCollections.observableArrayList();
-
-                    while(resultSet.next()){
-                        String value = resultSet.getString("Task_name");
-                        data.add(value);
-                    }
-                    recently_deleted_listView.setItems(data);
-                }
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
 
 
-
-    //                                                                                   Delete recently deleted tasks ************************************************************
+    //                                                                                   Delete recently deleted task  ************************************************************
     public void onDelete_recently_deleted_task(ActionEvent event){
         // First call the method below
         // Then run the populate_recently_deleted listview method
@@ -319,7 +339,93 @@ public class TasksController implements Initializable {
     }
 
 
-    //                                                                                                                 ************************************************************
+    //                                                                                   Recover recently deleted task ************************************************************
+    public void onRecover_recently_deleted_task(ActionEvent event){
+        recover_recently_deleted_task(header_username, recently_deleted_listView.getSelectionModel().getSelectedItem().toString());
+        populate_deleted_tasks(header_username);
+        populate_Tasks_List(header_username);
+    }
+    public void recover_recently_deleted_task(String username, String taskName){
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT * FROM Recently_Deleted_Tasks WHERE Username = ? AND Task_Name = ?";
+            String insertQuery = "INSERT INTO Tasks (Username, Task, `Task Description`, `Task Aim Date`, `Task Completed Date`) VALUES (?, ?, ?, ?, ?)";
+            String deleteQuery = "DELETE FROM Recently_Deleted_Tasks WHERE Username = ? AND Task_Name = ?";
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery);
+                PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+                PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery)){
 
-    //                                                                                                                 ************************************************************
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, taskName);
+
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    if(resultSet.next()){
+                        insertStatement.setString(1, resultSet.getString("Username"));
+                        insertStatement.setString(2, resultSet.getString("Task_Name"));
+                        insertStatement.setString(3, resultSet.getString("Task_Description"));
+                        insertStatement.setString(4, resultSet.getString("Task_Aim_Date"));
+                        insertStatement.setString(5, resultSet.getString("Task_Completed_Date"));
+
+                        int rowsInserted = insertStatement.executeUpdate();
+
+                        if(rowsInserted>0){
+                            deleteStatement.setString(1, username);
+                            deleteStatement.setString(2, taskName);
+                            deleteStatement.executeUpdate();
+                        }
+                    }
+                }
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    //                                                                                   Completed Tasks container     ************************************************************
+
+    public void onCompleted_active_task(ActionEvent event){
+        complete_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
+        populate_Tasks_List(header_username);
+        populate_completed_list(header_username);
+
+    }
+    public void complete_task(String username, String taskName){
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT * FROM Tasks WHERE Username = ? AND Task = ?";
+            String insertQuery = "INSERT INTO Completed_Tasks (Username, Task_Name, Task_Description, Task_Aim_Date, Task_Completed_Date) VALUES (?, ?, ?, ?, ?)";
+            String deleteQuery = "DELETE FROM Tasks WHERE Username = ? AND Task = ?";
+
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery);
+                PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+                PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery)){
+
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, taskName);
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    if(resultSet.next()){
+                        insertStatement.setString(1, resultSet.getString("Username"));
+                        insertStatement.setString(2, resultSet.getString("Task"));
+                        insertStatement.setString(3, resultSet.getString("Task Description"));
+                        insertStatement.setString(4, resultSet.getString("Task Aim Date"));
+                        insertStatement.setString(5, resultSet.getString("Task Completed Date"));
+
+                        int rowsInserted = insertStatement.executeUpdate();
+                        if(rowsInserted > 0){
+                            deleteStatement.setString(1, username);
+                            deleteStatement.setString(2, taskName);
+                            deleteStatement.executeUpdate();
+                        }
+                    }
+                }
+            }
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }
