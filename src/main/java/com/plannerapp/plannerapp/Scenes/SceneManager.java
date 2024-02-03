@@ -46,6 +46,7 @@ public class SceneManager {
         // Populating the list views
         tasksController.populate_Tasks_List(username);
         tasksController.populate_deleted_tasks(username);
+        tasksController.populate_completed_list(username);
     }
     // Profile
     public void showProfile(){
