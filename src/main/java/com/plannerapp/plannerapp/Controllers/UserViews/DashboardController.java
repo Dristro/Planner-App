@@ -34,6 +34,9 @@ public class DashboardController implements Initializable {
     private final SceneManager sceneManager = new SceneManager();
     public TextField add_task_description;
     public Label error_lbl;
+    public Label task_description_desc_lbl;
+    public Label task_date_desc_lbl;
+    public Label task_name_desc_lbl;
 
     private String header_username;
 
@@ -187,6 +190,94 @@ public class DashboardController implements Initializable {
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    // Show task properties below selected task
+    public void onTask_selected(){
+        set_current_task_data(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
+    }
+
+    public void set_current_task_data(String username, String taskName){
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT * FROM Tasks WHERE Username = ? AND Task = ?";
+
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery)){
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, taskName);
+
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    if(resultSet.next()){
+                        task_name_desc_lbl.setText(taskName);
+                        task_description_desc_lbl.setText(resultSet.getString("Task Description"));
+                        task_date_desc_lbl.setText(resultSet.getString("Task Aim Date"));
+                    }
+                }
+            }
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void onComplete_Task(ActionEvent event){
+        complete_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
+        populate_Tasks_List(header_username);
+    }
+    public void complete_Task(String username, String taskName){
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT * FROM Tasks WHERE Username = ? AND Task = ?";
+            String insertQuery = "INSERT INTO Completed_Tasks (Username, Task_Name, Task_Description, Task_Aim_Date, Task_Completed_Date) VALUES (?, ?, ?, ?, ?)";
+            String deleteQuery = "DELETE FROM Tasks WHERE Username = ? AND Task = ?";
+
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery);
+                PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+                PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);){
+
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, taskName);
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    if(resultSet.next()){
+                        insertStatement.setString(1, resultSet.getString("Username"));
+                        insertStatement.setString(2, resultSet.getString("Task"));
+                        insertStatement.setString(3, resultSet.getString("Task Description"));
+                        insertStatement.setString(4, resultSet.getString("Task Aim Date"));
+                        insertStatement.setString(5, resultSet.getString("Task Completed Date"));
+
+                        int rowEffected = insertStatement.executeUpdate();
+                        if(rowEffected > 0){
+                            deleteStatement.setString(1, username);
+                            deleteStatement.setString(2, taskName);
+                            deleteStatement.executeUpdate();
+                        }
+                    }
+                }
+            }
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void onEdit_Task(ActionEvent event){
+        edit_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
+        populate_Tasks_List(header_username);
+    }
+    public void edit_Task(String username, String taskName){
+
+    }
+
+    public void onDelete_Task(){
+
+    }
+    public void delete_Task(){
+
     }
 
 
