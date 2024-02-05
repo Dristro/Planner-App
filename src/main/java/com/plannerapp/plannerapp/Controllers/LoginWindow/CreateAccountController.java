@@ -16,6 +16,7 @@ public class CreateAccountController {
     public PasswordField password_fld;
     public TextField newusername_fld;
     public Label error_lbl;
+    public Button back_btn;
 
     private SceneManager sceneManager = new SceneManager();
     private static final String DATABASE_URL = "jdbc:sqlite:PlannerAppDB.db";
@@ -88,6 +89,10 @@ public class CreateAccountController {
         if (addable) {
             closeAndShowLogin();
         }
+    }
+
+    public void onBack_btn(ActionEvent event){
+        closeAndShowLogin();
     }
 
     private void closeAndShowLogin() {

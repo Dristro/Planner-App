@@ -21,17 +21,19 @@
 }
 
 /* Login From styles */
-.loin_form_container {
+.login_form_container {
     -fx-spacing: 15;
-
+}
+.login_form_container_text{
+    -fx-text-fill: #FFFFFF;
 }
 
-.loin_form_container Label{
+.login_form_container Label{
     -fx-font-size: 1.1em;
     -fx-font-weight: bold;
 }
 
-.loin_form_container_title{
+.login_form_container_title{
     -fx-font-size: 1.8em;
     -fx-fill: #1198b6;
     -fx-font-weight: bold;
@@ -41,16 +43,16 @@
     -fx-background-color: #FFFFFF;
 }
 
-.loin_form_container Button{
+.login_form_container Button{
     -fx-background-color: #1198b6;
     -fx-text-fill: #FFFFFF;
 }
 
-.loin_form_container Button:hover{
+.login_form_container Button:hover{
     -fx-cursor: hand;
 }
 
 .error_lbl {
-    -fx-text-fill: #FF0000;
+    -fx-text-fill: #FFFFFF;
     -fx-alignment: center;
 }
