@@ -30,10 +30,6 @@ public class SceneManager {
         DashboardController dashboardController = loader.getController();
         dashboardController.set_Header(username);
         dashboardController.populate_Tasks_List(username);
-        // Setting the opacity of the buttons under the list view
-        dashboardController.complete_btn.setOpacity(0.7);
-        dashboardController.edit_btn.setOpacity(0.7);
-        dashboardController.delete_btn.setOpacity(0.7);
     }
     // Tasks
     public void showTasks(String username){

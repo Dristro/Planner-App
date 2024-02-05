@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="main_background" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.DashboardController">
    <VBox layoutX="57.0" layoutY="85.0" prefHeight="500.0" prefWidth="170.0" styleClass="left_menu_container" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
-      <Button fx:id="dashboard_btn" mnemonicParsing="false" text="Dashboard" />
+      <Button fx:id="dashboard_btn" mnemonicParsing="false" styleClass="active_tab_button" text="Dashboard" />
       <Button fx:id="tasks_btn" mnemonicParsing="false" onAction="#onTasks" text="Tasks" />
       <Button fx:id="profile_btn" mnemonicParsing="false" onAction="#onProfile" text="Profile" />
       <Button fx:id="planner_btn" mnemonicParsing="false" onAction="#onPlanner" text="Planner" />
@@ -21,37 +21,42 @@
       <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
    </VBox>
    <AnchorPane layoutX="174.0" layoutY="14.0" prefHeight="580.0" prefWidth="700.0" styleClass="main" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-      <HBox layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="680.0" styleClass="header_container" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="670.0" styleClass="header_container" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
          <Label fx:id="welcome_lbl" styleClass="header_container_welcome" text="Welcome label" />
          <Label fx:id="date_lbl" styleClass="header_container_date" text="Date label" />
       </HBox>
-      <VBox fillWidth="false" layoutX="66.0" layoutY="175.0" prefHeight="405.0" prefWidth="380.0" styleClass="current_task_container" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="70.0">
+      <VBox fillWidth="false" layoutX="66.0" layoutY="175.0" prefHeight="450.0" prefWidth="360.0" styleClass="current_task_container" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="70.0">
          <Label text="Current Tasks" />
-         <ListView fx:id="current_tasks_listView" prefHeight="340.0" prefWidth="360.0" />
+         <ListView fx:id="current_tasks_listView" onMouseClicked="#onTask_selected" prefHeight="200.0" prefWidth="340.0" />
+         <AnchorPane prefHeight="130.0" prefWidth="340.0" styleClass="task_description">
+            <children>
+               <Label layoutX="60.0" layoutY="22.0" prefHeight="19.0" prefWidth="87.0" styleClass="task_description_header_lbl" text="Task name: " AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+               <Label layoutX="5.0" layoutY="24.0" prefHeight="19.0" prefWidth="123.0" styleClass="task_description_header_lbl" text="Task description: " AnchorPane.leftAnchor="5.0" />
+               <Label layoutX="8.0" layoutY="86.0" prefHeight="19.0" prefWidth="67.0" styleClass="task_description_header_lbl" text="Aim date: " AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
+               <Label fx:id="task_description_desc_lbl" layoutX="5.0" layoutY="43.0" prefHeight="50.0" prefWidth="330.0" styleClass="task_description_user_writeup" text="user desc" AnchorPane.leftAnchor="5.0" />
+               <Label fx:id="task_date_desc_lbl" layoutX="72.0" layoutY="95.0" prefHeight="19.0" prefWidth="110.0" styleClass="task_description_user_task_name" text="5/Feb/2024" AnchorPane.bottomAnchor="5.0" />
+               <Label fx:id="task_name_desc_lbl" layoutX="84.0" layoutY="5.0" prefHeight="19.0" prefWidth="87.0" styleClass="task_description_user_task_name" text="Name" AnchorPane.topAnchor="5.0" />
+            </children></AnchorPane>
+         <HBox prefHeight="95.0" prefWidth="360.0" styleClass="edit_tasks_container">
+            <children>
+               <Button fx:id="complete_btn" mnemonicParsing="false" onAction="#onComplete_Task" styleClass="edit_tasks_complete_button" text="Complete" />
+               <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_tasks_edit_button" text="Edit" />
+               <Button fx:id="delete_btn" mnemonicParsing="false" styleClass="edit_tasks_delete_button" text="Delete" />
+            </children>
+         </HBox>
       </VBox>
-      <HBox layoutX="46.0" layoutY="475.0" prefHeight="95.0" prefWidth="380.0" styleClass="edit_tasks_container" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
-         <Button fx:id="complete_btn" mnemonicParsing="false" styleClass="edit_tasks_complete_button" text="Complete" />
-         <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_tasks_edit_button" text="Edit" />
-         <Button fx:id="delete_btn" mnemonicParsing="false" styleClass="edit_tasks_delete_button" text="Delete" />
-      </HBox>
-      <VBox fillWidth="false" layoutX="292.0" layoutY="118.0" prefHeight="243.0" prefWidth="300.0" styleClass="today_task_container" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
+      <VBox fillWidth="false" layoutX="292.0" layoutY="118.0" prefHeight="240.0" prefWidth="290.0" styleClass="today_task_container" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
          <Label text="Today's Tasks" />
-         <ListView fx:id="today_task_listView" prefHeight="170.0" prefWidth="280.0" />
+         <ListView fx:id="today_task_listView" prefHeight="170.0" prefWidth="270.0" />
       </VBox>
-      <VBox fillWidth="false" layoutX="390.0" layoutY="317.0" prefHeight="190.0" prefWidth="300.0" styleClass="add_task_container" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="285.0">
-         <Label text="Add task" />
+      <VBox fillWidth="false" layoutX="390.0" layoutY="317.0" prefHeight="200.0" prefWidth="290.0" styleClass="add_task_container" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="320.0">
+         <Label styleClass="add_task_container_lbl" text="Add task" />
          <TextField fx:id="add_task_fld" prefHeight="26.0" prefWidth="170.0" promptText="Task Name" />
          <TextField fx:id="add_task_description" prefHeight="26.0" prefWidth="170.0" promptText="Task Description (Optional)" />
          <DatePicker fx:id="add_task_date" prefHeight="26.0" prefWidth="170.0" promptText="Date of Completion" />
          <Button fx:id="add_task_btn" mnemonicParsing="false" onAction="#getTaskData" prefHeight="26.0" prefWidth="60.0" text="Add" />
+         <Label fx:id="error_lbl" prefHeight="17.0" prefWidth="200.0" styleClass="error_lbl" text="Error lbl" visible="false" />
       </VBox>
-      <AnchorPane layoutX="381.0" layoutY="423.0" prefHeight="95.0" prefWidth="300.0" styleClass="logo_container" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
-         <FontAwesomeIconView glyphName="PENCIL_SQUARE" layoutX="246.0" layoutY="53.0" size="45" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-         <VBox layoutX="-11.0" layoutY="-15.0" prefHeight="10.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-               <Label fx:id="error_lbl" prefHeight="17.0" prefWidth="200.0" text="Error lbl" visible="false" />
-            </children>
-         </VBox>
-      </AnchorPane>
    </AnchorPane>
+   <FontAwesomeIconView glyphName="PENCIL_SQUARE" layoutX="256.0" layoutY="63.0" size="45" styleClass="logo" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
 </AnchorPane>
