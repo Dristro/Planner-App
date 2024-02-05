@@ -27,11 +27,15 @@
 /* Login From styles */
 .loin_form_container {
     -fx-spacing: 15;
-
 }
 
 .loin_form_container Label{
     -fx-font-size: 1.1em;
+    -fx-font-weight: bold;
+}
+.login_form_container_title{
+    -fx-font-size: 1.8em;
+    -fx-fill: #1198b6;
     -fx-font-weight: bold;
 }
 
@@ -49,6 +53,6 @@
 }
 
 .error_lbl {
-    -fx-text-fill: #FF0000;
-
+    -fx-text-fill: #FFFFFF;
+    -fx-alignment: center;
 }
