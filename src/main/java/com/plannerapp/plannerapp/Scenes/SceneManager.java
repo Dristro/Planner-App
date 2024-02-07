@@ -65,6 +65,11 @@ public class SceneManager {
         popup.show(stage);
     }
 
+    public void showEdit(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/UserViews/Edit.fxml"));
+        createStage(loader);
+    }
+
 
     private void createStage(FXMLLoader loader) {
         Scene scene = null;

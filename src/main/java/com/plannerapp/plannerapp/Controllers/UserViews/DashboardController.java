@@ -74,6 +74,10 @@ public class DashboardController implements Initializable {
         //Show the dashboard
         sceneManager.showLogin();
     }
+    public void openEdit(){
+        //Stage stage = (Stage) (welcome_lbl.getScene().getWindow());
+        sceneManager.showEdit();
+    }
 
     //Opening the respective windows when clicked
     public void onTasks(ActionEvent event){            // Tasks
@@ -266,18 +270,60 @@ public class DashboardController implements Initializable {
     }
 
     public void onEdit_Task(ActionEvent event){
-        edit_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
-        populate_Tasks_List(header_username);
+
+
+        try{
+            edit_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_Tasks_List(header_username);
+        } catch (Exception e){
+
+        }
     }
     public void edit_Task(String username, String taskName){
-
+        openEdit();
     }
 
     public void onDelete_Task(){
-
+        delete_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
+        populate_Tasks_List(header_username);
     }
-    public void delete_Task(){
+    public void delete_Task(String username, String taskName){
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT * FROM Tasks WHERE Username = ? AND Task = ?";
+            String insertQuery = "INSERT INTO Recently_Deleted_Tasks (Username, Task_name, Task_Description, Task_Aim_Date, Task_Completed_Date) VALUES (?, ?, ?, ?, ?)";
+            String deleteQuery = "DELETE FROM Tasks WHERE Username = ? AND Task = ?";
 
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery);
+                PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+                PreparedStatement deleteStatement = conn.prepareStatement(deleteQuery);){
+
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, taskName);
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    if(resultSet.next()){
+                        insertStatement.setString(1, resultSet.getString("Username"));
+                        insertStatement.setString(2, resultSet.getString("Task"));
+                        insertStatement.setString(3, resultSet.getString("Task Description"));
+                        insertStatement.setString(4, resultSet.getString("Task Aim Date"));
+                        insertStatement.setString(5, resultSet.getString("Task Completed Date"));
+
+                        int rowsEffected = insertStatement.executeUpdate();
+                        if(rowsEffected>0){
+                            deleteStatement.setString(1, username);
+                            deleteStatement.setString(2, taskName);
+                            deleteStatement.executeUpdate();
+                        }
+                    }
+                }
+
+            }
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

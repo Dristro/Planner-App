@@ -1,0 +1,28 @@
+.main{
+    -fx-background-color: #101010;
+}
+
+.main_vBox{
+    -fx-alignment: center;
+}
+.main_vBox_text{
+    -fx-alignment: center;
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 1.5em;
+}
+
+.main_hBox_user_input{
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
+
+.main_hBox_buttons{
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+.main_hBox_buttons Button{
+    -fx-background-color: #1198b6;
+    -fx-text-fill: #FFFFFF;
+    -fx-pref-width: 80;
+    -fx-pref-height: 20;
+}
