@@ -11,23 +11,23 @@
 
 <AnchorPane prefHeight="200.0" prefWidth="300.0" styleClass="main" stylesheets="@../../Styles/EditTask.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.EditTaskController">
     <VBox fillWidth="false" layoutX="80.0" layoutY="-14.0" prefHeight="180.0" prefWidth="280.0" styleClass="main_vBox" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main_vBox_text" text="Edit Task">
+        <Text fx:id="edit_task_lbl" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main_vBox_text" text="Edit Task">
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
       </Text>
         <HBox fillHeight="false" prefHeight="30.0" prefWidth="250.0" styleClass="main_hBox_user_input">
-            <TextField prefWidth="180.0" promptText="Task Name" />
+            <TextField fx:id="taskName_fld" prefWidth="180.0" promptText="Task Name" />
         </HBox>
         <HBox fillHeight="false" prefHeight="30.0" prefWidth="250.0" styleClass="main_hBox_user_input">
-            <TextField prefWidth="180.0" promptText="Task Desctiption" />
+            <TextField fx:id="taskDescription_fld" prefWidth="180.0" promptText="Task Description" />
         </HBox>
         <HBox fillHeight="false" prefHeight="30.0" prefWidth="250.0" styleClass="main_hBox_user_input">
-            <DatePicker prefHeight="26.0" prefWidth="180.0" promptText="Task Aim  Date" />
+            <DatePicker fx:id="taskAimDate_fld" prefHeight="26.0" prefWidth="180.0" promptText="Task Aim  Date" />
         </HBox>
         <HBox fillHeight="false" prefHeight="30.0" prefWidth="250.0" styleClass="main_hBox_buttons">
-            <Button mnemonicParsing="false" text="Cancel" />
-            <Button mnemonicParsing="false" text="Update" />
+            <Button fx:id="cancel_btn" onAction="#onCancel" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="update_btn" onAction="#onUpdate" mnemonicParsing="false" text="Update" />
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
