@@ -76,7 +76,7 @@ public class DashboardController implements Initializable {
     }
     public void openEdit(){
         //Stage stage = (Stage) (welcome_lbl.getScene().getWindow());
-        sceneManager.showEdit();
+        sceneManager.showEdit(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
     }
 
     //Opening the respective windows when clicked
@@ -270,8 +270,6 @@ public class DashboardController implements Initializable {
     }
 
     public void onEdit_Task(ActionEvent event){
-
-
         try{
             edit_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
             populate_Tasks_List(header_username);

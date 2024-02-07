@@ -2,6 +2,7 @@ package com.plannerapp.plannerapp.Scenes;
 
 
 import com.plannerapp.plannerapp.Controllers.UserViews.DashboardController;
+import com.plannerapp.plannerapp.Controllers.UserViews.EditTaskController;
 import com.plannerapp.plannerapp.Controllers.UserViews.TasksController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -65,9 +66,14 @@ public class SceneManager {
         popup.show(stage);
     }
 
-    public void showEdit(){
+    public void showEdit(String username, String taskName){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/UserViews/Edit.fxml"));
         createStage(loader);
+        EditTaskController editTaskController = loader.getController();
+        editTaskController.set_Header(username);
+        editTaskController.setTaskName(username, taskName);
+        editTaskController.setTaskDescription(username, taskName);
+        editTaskController.setTaskAimDate(username, taskName);
     }
 
 
