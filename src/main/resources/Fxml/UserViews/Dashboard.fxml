@@ -40,8 +40,8 @@
          <HBox prefHeight="95.0" prefWidth="360.0" styleClass="edit_tasks_container">
             <children>
                <Button fx:id="complete_btn" mnemonicParsing="false" onAction="#onComplete_Task" styleClass="edit_tasks_complete_button" text="Complete" />
-               <Button fx:id="edit_btn" mnemonicParsing="false" styleClass="edit_tasks_edit_button" text="Edit" />
-               <Button fx:id="delete_btn" mnemonicParsing="false" styleClass="edit_tasks_delete_button" text="Delete" />
+               <Button fx:id="edit_btn" mnemonicParsing="false" onAction="#onEdit_Task" styleClass="edit_tasks_edit_button" text="Edit" />
+               <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#onDelete_Task" styleClass="edit_tasks_delete_button" text="Delete" />
             </children>
          </HBox>
       </VBox>
