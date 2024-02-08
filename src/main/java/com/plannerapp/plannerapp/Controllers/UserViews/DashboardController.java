@@ -226,11 +226,14 @@ public class DashboardController implements Initializable {
         }
     }
 
-
-
+    
     public void onComplete_Task(ActionEvent event){
-        complete_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
-        populate_Tasks_List(header_username);
+        try {
+            complete_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_Tasks_List(header_username);
+        } catch (Exception e){
+
+        }
     }
     public void complete_Task(String username, String taskName){
         try{
@@ -282,8 +285,12 @@ public class DashboardController implements Initializable {
     }
 
     public void onDelete_Task(){
-        delete_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
-        populate_Tasks_List(header_username);
+        try {
+            delete_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_Tasks_List(header_username);
+        } catch (Exception e){
+
+        }
     }
     public void delete_Task(String username, String taskName){
         try{
