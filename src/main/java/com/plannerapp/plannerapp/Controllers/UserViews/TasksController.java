@@ -82,6 +82,10 @@ public class TasksController implements Initializable {
         //Show the dashboard
         sceneManager.showLogin();
     }
+    public void openEdit(){
+        //Stage stage = (Stage) (welcome_lbl.getScene().getWindow());
+        sceneManager.showEdit(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
+    }
 
     //Opening the respective windows when clicked
     public void onDashboard(ActionEvent event){            // Tasks
@@ -238,31 +242,26 @@ public class TasksController implements Initializable {
 
     // Editing a selected active Task
     public void onEdit_active_task(ActionEvent event){
-        edit_active_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
+        try{
+            edit_active_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_Tasks_List(header_username);
+        } catch (Exception e){
 
+        }
     }
     public void edit_active_task(String username, String taskName){
-
+        openEdit();
     }
 
-    // Deletes and moves active tasks to the deleted table
-    /*public void selected_tasks(){
-        active_tasks_listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue!=null){
-                complete_active_btn.setDisable(false);          // Enable the buttons if selected
-                edit_active_btn.setDisable(false);
-                delete_active_btn.setDisable(false);
-            } else {
-                complete_active_btn.setDisable(true);           // Disable the buttons if not selected
-                edit_active_btn.setDisable(true);
-                delete_active_btn.setDisable(true);
-            }
-        });
-    }*/
+
     public void onDelete_active_task(ActionEvent event){
-        delete_active_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
-        populate_deleted_tasks(header_username);
-        populate_Tasks_List(header_username);
+        try {
+            delete_active_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_deleted_tasks(header_username);
+            populate_Tasks_List(header_username);
+        } catch (Exception e){
+
+        }
     }
     public void delete_active_task(String username, String taskName) {
         try {
@@ -327,8 +326,12 @@ public class TasksController implements Initializable {
     public void onDelete_recently_deleted_task(ActionEvent event){
         // First call the method below
         // Then run the populate_recently_deleted listview method
-        delete_recently_deleted_task(header_username, recently_deleted_listView.getSelectionModel().getSelectedItem().toString());
-        populate_deleted_tasks(header_username);
+        try {
+            delete_recently_deleted_task(header_username, recently_deleted_listView.getSelectionModel().getSelectedItem().toString());
+            populate_deleted_tasks(header_username);
+        } catch (Exception e){
+
+        }
     }
     private void delete_recently_deleted_task(String username, String taskName){
         // Add the code for accessing the DB and deleting the task from the Recently_Deleted table
@@ -351,9 +354,13 @@ public class TasksController implements Initializable {
 
     // Deletes the task from the recently deleted table and moves it to the active tasks table
     public void onRecover_recently_deleted_task(ActionEvent event){
-        recover_recently_deleted_task(header_username, recently_deleted_listView.getSelectionModel().getSelectedItem().toString());
-        populate_deleted_tasks(header_username);
-        populate_Tasks_List(header_username);
+        try {
+            recover_recently_deleted_task(header_username, recently_deleted_listView.getSelectionModel().getSelectedItem().toString());
+            populate_deleted_tasks(header_username);
+            populate_Tasks_List(header_username);
+        } catch (Exception e){
+
+        }
     }
     public void recover_recently_deleted_task(String username, String taskName){
         try{
@@ -396,9 +403,13 @@ public class TasksController implements Initializable {
     //                                                                                   Completed Tasks container     ************************************************************
 
     public void onCompleted_active_task(ActionEvent event){
-        complete_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
-        populate_Tasks_List(header_username);
-        populate_completed_list(header_username);
+        try {
+            complete_task(header_username, active_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_Tasks_List(header_username);
+            populate_completed_list(header_username);
+        } catch (Exception e){
+
+        }
 
     }
     public void complete_task(String username, String taskName){
@@ -440,9 +451,13 @@ public class TasksController implements Initializable {
 
 
     public void onDelete_completed_task(ActionEvent event){
-        delete_completed_task(header_username, completed_tasks_listView.getSelectionModel().getSelectedItem().toString());
-        populate_completed_list(header_username);
-        populate_deleted_tasks(header_username);
+        try {
+            delete_completed_task(header_username, completed_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_completed_list(header_username);
+            populate_deleted_tasks(header_username);
+        } catch (Exception e){
+
+        }
     }
     public void delete_completed_task(String username, String taskName){
         try{
@@ -484,9 +499,13 @@ public class TasksController implements Initializable {
 
 
     public void onActivate_Completed_Tasks(ActionEvent event){
-        activate_completed_tasks(header_username, completed_tasks_listView.getSelectionModel().getSelectedItem().toString());
-        populate_completed_list(header_username);
-        populate_Tasks_List(header_username);
+        try {
+            activate_completed_tasks(header_username, completed_tasks_listView.getSelectionModel().getSelectedItem().toString());
+            populate_completed_list(header_username);
+            populate_Tasks_List(header_username);
+        } catch (Exception e){
+
+        }
     }
     public void activate_completed_tasks(String username, String taskName){
         try{

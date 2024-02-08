@@ -15,9 +15,6 @@
     -fx-alignment: center;
     /*-fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
 }
-.active_tab_button{
-    -fx-background-color: #1198b6;
-}
 .left_menu_logout_container{
     -fx-background-color: #212121;
     -fx-background-radius: 0 0 10px 10px;
@@ -32,6 +29,9 @@
     -fx-font-size: 1.1em;
     -fx-alignment: center;
     /* -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
+}
+.active_tab_button{
+    -fx-background-color: #1198b6;
 }
 
 .edit_tasks_container{
@@ -87,7 +87,7 @@
 }
 .current_task_container ListView{
     -fx-background-color: #EEEEEE;
-    -fx-background-radius: 10px 10px 0 0;
+    -fx-background-radius: 5px 5px 0 0;
 }
 
 .header_container{
@@ -118,7 +118,7 @@
 }
 .today_task_container ListView{
     -fx-background-color: #EEEEEE;
-    -fx-background-radius: 10px;
+    -fx-background-radius: 5px;
 }
 
 .add_task_container{
@@ -144,7 +144,7 @@
 
 .task_description{
     -fx-background-color: #EEEEEE;
-    -fx-background-radius: 0 0 10px 10px;
+    -fx-background-radius: 0 0 5px 5px;
 }
 .task_description_header_lbl{
     -fx-text-fill: #000000;

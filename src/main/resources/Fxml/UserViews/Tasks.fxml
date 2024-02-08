@@ -10,10 +10,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../../Styles/TasksWindow.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.TasksController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="background_main" stylesheets="@../../Styles/TasksWindow.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.TasksController">
    <VBox layoutX="14.0" layoutY="14.0" prefHeight="500.0" prefWidth="170.0" styleClass="left_menu_container" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
       <Button fx:id="dashboard_btn" mnemonicParsing="false" onAction="#onDashboard" text="Dashboard" />
-      <Button fx:id="tasks_btn" mnemonicParsing="false" text="Tasks" />
+      <Button fx:id="tasks_btn" mnemonicParsing="false" styleClass="active_tab_button" text="Tasks" />
       <Button fx:id="profile_btn" mnemonicParsing="false" onAction="#onProfile" text="Profile" />
       <Button fx:id="planner_btn" mnemonicParsing="false" onAction="#onPlanner" text="Planner" />
    </VBox>
@@ -38,7 +38,7 @@
          <ListView fx:id="active_tasks_listView" prefHeight="150.0" prefWidth="200.0" />
          <HBox prefHeight="50.0" prefWidth="200.0">
             <Button fx:id="complete_active_btn" mnemonicParsing="false" onAction="#onCompleted_active_task" styleClass="active_tasks_container_complete" text="Complete" />
-            <Button fx:id="edit_active_btn" mnemonicParsing="false" styleClass="active_tasks_container_edit" text="Edit" />
+            <Button fx:id="edit_active_btn" onAction="#onEdit_active_task" mnemonicParsing="false" styleClass="active_tasks_container_edit" text="Edit" />
             <Button fx:id="delete_active_btn" mnemonicParsing="false" onAction="#onDelete_active_task" styleClass="active_tasks_container_delete" text="Delete" />
          </HBox>
       </VBox>
