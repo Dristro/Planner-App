@@ -68,7 +68,7 @@ public class TasksController implements Initializable {
         Stage stage = (Stage) (welcome_lbl.getScene().getWindow());     //Change from welcome_lbl to other for other controllers
         sceneManager.closeStage(stage);
         //Show the dashboard
-        sceneManager.showProfile();
+        sceneManager.showProfile(header_username);
     }
     public void openPlanner(){
         Stage stage = (Stage) (welcome_lbl.getScene().getWindow());     //Change from welcome_lbl to other for other controllers

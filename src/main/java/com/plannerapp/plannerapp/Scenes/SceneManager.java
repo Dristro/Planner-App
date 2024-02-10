@@ -3,6 +3,7 @@ package com.plannerapp.plannerapp.Scenes;
 
 import com.plannerapp.plannerapp.Controllers.UserViews.DashboardController;
 import com.plannerapp.plannerapp.Controllers.UserViews.EditTaskController;
+import com.plannerapp.plannerapp.Controllers.UserViews.ProfileController;
 import com.plannerapp.plannerapp.Controllers.UserViews.TasksController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -46,9 +47,15 @@ public class SceneManager {
         tasksController.populate_completed_list(username);
     }
     // Profile
-    public void showProfile(){
+    public void showProfile(String username){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/UserViews/Profile.fxml"));
         createStage(loader);
+
+        // Setting the welcome header
+        ProfileController profileController = loader.getController();
+        profileController.set_Header(username);
+        // Populating the user labels
+        profileController.setCurrentFields();
     }
     // Planner
     public void showPlanner(){

@@ -60,7 +60,7 @@ public class DashboardController implements Initializable {
         Stage stage = (Stage) (welcome_lbl.getScene().getWindow());     //Change from welcome_lbl to other for other controllers
         sceneManager.closeStage(stage);
         //Show the dashboard
-        sceneManager.showProfile();
+        sceneManager.showProfile(header_username);
     }
     public void openPlanner(){
         Stage stage = (Stage) (welcome_lbl.getScene().getWindow());     //Change from welcome_lbl to other for other controllers
@@ -226,7 +226,7 @@ public class DashboardController implements Initializable {
         }
     }
 
-    
+
     public void onComplete_Task(ActionEvent event){
         try {
             complete_Task(header_username, current_tasks_listView.getSelectionModel().getSelectedItem().toString());
