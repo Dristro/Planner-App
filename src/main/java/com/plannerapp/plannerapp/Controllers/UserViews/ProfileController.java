@@ -31,6 +31,8 @@ public class ProfileController implements Initializable {
     public TextField new_email_fld;
     public Label current_email_lbl;
     public Button delete_account_btn;
+    public TextField password_fld;
+    public TextField username_fld;
 
     private String header_username;
     private final SceneManager sceneManager = new SceneManager();
@@ -49,13 +51,20 @@ public class ProfileController implements Initializable {
 
     // Various methods for window
 
-    //Methods for opening various windows
+    // Methods for opening various windows
     public void openDashboard(){
         //Close the current stage
         Stage stage = (Stage) (welcome_lbl.getScene().getWindow());
         sceneManager.closeStage(stage);
         //Show the dashboard
         sceneManager.showDashboard(header_username);
+    }
+    public void openTask(){
+        //Close the current stage
+        Stage stage = (Stage) (welcome_lbl.getScene().getWindow());
+        sceneManager.closeStage(stage);
+        //Show the dashboard
+        sceneManager.showTasks(header_username);
     }
     public void openProfile(){
         Stage stage = (Stage) (welcome_lbl.getScene().getWindow());     //Change from welcome_lbl to other for other controllers
@@ -76,9 +85,12 @@ public class ProfileController implements Initializable {
         sceneManager.showLogin();
     }
 
-    //Opening the respective windows when clicked
+    // Opening the respective windows when clicked
     public void onDashboard(ActionEvent event){            // Tasks
         openDashboard();
+    }
+    public void onTasks(ActionEvent event){            // Tasks
+        openTask();
     }
     public void onProfile(ActionEvent event){          // Profile
         openProfile();
@@ -143,8 +155,9 @@ public class ProfileController implements Initializable {
 
     // Edit current username to a new one
     public void onEdit_username(ActionEvent event){
-        if(new_username_fld.getText().toString() == null){
-            System.out.println("No username");
+        if(new_username_fld.getText().isEmpty()){
+            System.out.println("No username provided");
+            return;
         }
         editUsername(header_username, new_username_fld.getText().toString());
         setCurrentFields();
@@ -191,11 +204,132 @@ public class ProfileController implements Initializable {
         }
     }
 
-
     // Edit current email to a new one
+    public void onEdit_email(ActionEvent event){
+        if(new_email_fld.getText().isEmpty()){
+            System.out.println("No email provided");
+            return;
+        }
+        editEmail(header_username, new_email_fld.getText().toString());
+        setCurrentFields();
+    }
+    public void editEmail(String username, String newEmail){
+        try{
+            Connection conn = establishConnection();
+            String updateUsersQuery = "UPDATE Users SET Email = ? WHERE Username = ?";
+
+
+            try(PreparedStatement updateUsersStatement = conn.prepareStatement(updateUsersQuery)){
+
+                updateUsersStatement.setString(1, newEmail);
+                updateUsersStatement.setString(2, username);
+
+
+                int usersRowsEffected = updateUsersStatement.executeUpdate();
+
+                if(usersRowsEffected>0){
+                    System.out.println("Done");
+                }
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // Edit current password to a new one
+    public void onEdit_password(ActionEvent event){
+        if(new_password_fld.getText().isEmpty()){
+            System.out.println("No password provided");
+            return;
+        }
+        editPassword(header_username, new_password_fld.getText().toString());
+        setCurrentFields();
+    }
+    public void editPassword(String username, String newPassword){
+        try{
+            Connection conn = establishConnection();
+            String updateQuery = "UPDATE Users SET Password = ? WHERE Username = ?";
 
+            try(PreparedStatement updateStatement = conn.prepareStatement(updateQuery)){
+                updateStatement.setString(1, newPassword);
+                updateStatement.setString(2, username);
+
+                int rowsEffected = updateStatement.executeUpdate();
+            }
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // Delete the user's account and all the data related to it
+    public void onDelete_account(ActionEvent event){
+        deleteAccount(username_fld.getText(), password_fld.getText());
+        onLogout(event);
+    }
+    public void deleteAccount(String username, String password){
+        if(isCredentialCorrect(username, password)){
+            try{
+                Connection conn = establishConnection();
+                String deleteUsers = "DELETE FROM Users WHERE Username = ? AND Password = ?";
+                String deleteRecentlyDeleted = "DELETE FROM Recently_Deleted_Tasks WHERE Username = ?";
+                String deleteCompletedTasks = "DELETE FROM Completed_Tasks WHERE Username = ?";
+                String deleteTasks = "DELETE FROM Tasks WHERE Username = ?";
+
+                try(PreparedStatement usersStatement = conn.prepareStatement(deleteUsers);
+                    PreparedStatement recentlyStatement = conn.prepareStatement(deleteRecentlyDeleted);
+                    PreparedStatement completedStatement = conn.prepareStatement(deleteCompletedTasks);
+                    PreparedStatement tasksStatement = conn.prepareStatement(deleteTasks)){
+
+                    usersStatement.setString(1, username);
+                    usersStatement.setString(2, password);
+                    recentlyStatement.setString(1, username);
+                    completedStatement.setString(1, username);
+                    tasksStatement.setString(1, username);
+
+                    int usersRowsEffected = usersStatement.executeUpdate();
+                    int recentlyRowsEffected = recentlyStatement.executeUpdate();
+                    int completedRowsEffected = completedStatement.executeUpdate();
+                    int tasksRowsEffected = tasksStatement.executeUpdate();
+
+                    System.out.println("Done");
+
+                }
+
+
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+    private boolean isCredentialCorrect(String username, String password){
+        try{
+            Connection conn = establishConnection();
+            String query = "SELECT * FROM Users WHERE Username = ? AND Password = ?";
+            try(PreparedStatement statement = conn.prepareStatement(query)){
+                statement.setString(1, username);
+                statement.setString(2, password);
+
+                try(ResultSet resultSet = statement.executeQuery()){
+                    if(resultSet.next()){
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
 

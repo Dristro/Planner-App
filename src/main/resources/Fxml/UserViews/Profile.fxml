@@ -8,67 +8,46 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="main_background" stylesheets="@../../Styles/Profile.css"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.ProfileController">
-   <VBox layoutX="24.0" layoutY="24.0" prefHeight="500.0" prefWidth="170.0" styleClass="left_menu_container"
-         AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
-      <Button fx:id="dashboard_btn" mnemonicParsing="false" onAction="#onDashboard" text="Dashboard"/>
-      <Button fx:id="tasks_btn" mnemonicParsing="false" text="Tasks"/>
-      <Button fx:id="profile_btn" mnemonicParsing="false" onAction="#onProfile" styleClass="active_tab_button"
-              text="Profile"/>
-      <Button fx:id="planner_btn" mnemonicParsing="false" onAction="#onPlanner" text="Planner"/>
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="main_background" stylesheets="@../../Styles/Profile.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.plannerapp.plannerapp.Controllers.UserViews.ProfileController">
+   <VBox layoutX="24.0" layoutY="24.0" prefHeight="500.0" prefWidth="170.0" styleClass="left_menu_container" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <Button fx:id="dashboard_btn" mnemonicParsing="false" onAction="#onDashboard" text="Dashboard" />
+      <Button fx:id="tasks_btn" mnemonicParsing="false" onAction="#onTasks" text="Tasks" />
+      <Button fx:id="profile_btn" mnemonicParsing="false" onAction="#onProfile" styleClass="active_tab_button" text="Profile" />
+      <Button fx:id="planner_btn" mnemonicParsing="false" onAction="#onPlanner" text="Planner" />
    </VBox>
-   <VBox layoutX="24.0" layoutY="516.0" prefHeight="80.0" prefWidth="170.0" styleClass="left_menu_logout_container"
-         AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
-      <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#onLogout" text="Logout"/>
+   <VBox layoutX="24.0" layoutY="516.0" prefHeight="80.0" prefWidth="170.0" styleClass="left_menu_logout_container" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
    </VBox>
-   <AnchorPane layoutX="183.0" layoutY="56.0" prefHeight="580.0" prefWidth="700.0" styleClass="task_main_window"
-               AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-      <HBox layoutX="20.0" layoutY="20.0" prefHeight="50.0" prefWidth="680.0" styleClass="header_container"
-            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
-         <Label fx:id="welcome_lbl" styleClass="header_container_welcome" text="Welcome label"/>
-         <Label fx:id="date_lbl" styleClass="header_container_date" text="Date label"/>
+   <AnchorPane layoutX="183.0" layoutY="56.0" prefHeight="580.0" prefWidth="700.0" styleClass="task_main_window" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <HBox layoutX="20.0" layoutY="20.0" prefHeight="50.0" prefWidth="680.0" styleClass="header_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+         <Label fx:id="welcome_lbl" styleClass="header_container_welcome" text="Welcome label" />
+         <Label fx:id="date_lbl" styleClass="header_container_date" text="Date label" />
       </HBox>
-      <FontAwesomeIconView glyphName="PENCIL_SQUARE" size="45" AnchorPane.bottomAnchor="20.0"
-                           AnchorPane.rightAnchor="20.0"/>
-      <AnchorPane layoutX="14.0" layoutY="76.0" prefHeight="100.0" prefWidth="250.0"
-                  styleClass="profile_menu_username" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0">
-         <Label layoutX="53.0" layoutY="24.0" prefHeight="30.0" prefWidth="65.0" text="Username:"
-                AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0"/>
-         <Button fx:id="edit_username_btn" layoutX="172.0" layoutY="12.0" onAction="#onEdit_username" mnemonicParsing="false" text="Edit"
-                 AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0"/>
-         <TextField fx:id="new_username_fld" layoutX="45.0" layoutY="55.0" prefHeight="30.0" prefWidth="230.0"
-                    promptText="New username" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0"
-                    AnchorPane.rightAnchor="10.0"/>
-         <Label fx:id="current_username_lbl" layoutX="75.0" layoutY="14.0" prefHeight="30.0" prefWidth="120.0"
-                text="real username" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="10.0"/>
+      <FontAwesomeIconView glyphName="PENCIL_SQUARE" size="45" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <AnchorPane layoutX="14.0" layoutY="76.0" prefHeight="100.0" prefWidth="250.0" styleClass="profile_menu_username" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0">
+         <Label layoutX="53.0" layoutY="24.0" prefHeight="30.0" prefWidth="65.0" text="Username:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+         <Button fx:id="edit_username_btn" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEdit_username" text="Edit" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0" />
+         <TextField fx:id="new_username_fld" layoutX="45.0" layoutY="55.0" prefHeight="30.0" prefWidth="230.0" promptText="New username" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+         <Label fx:id="current_username_lbl" layoutX="75.0" layoutY="14.0" prefHeight="30.0" prefWidth="120.0" text="real username" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="10.0" />
       </AnchorPane>
-      <AnchorPane layoutX="95.0" layoutY="321.0" prefHeight="100.0" prefWidth="250.0"
-                  styleClass="profile_menu_password" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="280.0">
-         <Label layoutX="53.0" layoutY="24.0" prefHeight="30.0" prefWidth="65.0" text="Password:"
-                AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0"/>
-         <Button fx:id="edit_password_btn" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" text="Edit"
-                 AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0"/>
-         <TextField fx:id="new_password_fld" layoutX="45.0" layoutY="55.0" prefHeight="30.0" prefWidth="230.0"
-                    promptText="New password" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0"
-                    AnchorPane.rightAnchor="10.0"/>
-         <Label fx:id="current_password_lbl" layoutX="75.0" layoutY="14.0" prefHeight="30.0" prefWidth="120.0"
-                text="password 1st and last 2" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="10.0"/>
+      <AnchorPane layoutX="95.0" layoutY="321.0" prefHeight="100.0" prefWidth="250.0" styleClass="profile_menu_password" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="280.0">
+         <Label layoutX="53.0" layoutY="24.0" prefHeight="30.0" prefWidth="65.0" text="Password:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+         <Button fx:id="edit_password_btn" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEdit_password" text="Edit" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0" />
+         <TextField fx:id="new_password_fld" layoutX="45.0" layoutY="55.0" prefHeight="30.0" prefWidth="230.0" promptText="New password" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+         <Label fx:id="current_password_lbl" layoutX="75.0" layoutY="14.0" prefHeight="30.0" prefWidth="120.0" text="password 1st and last 2" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="10.0" />
       </AnchorPane>
-      <AnchorPane layoutX="43.0" layoutY="204.0" prefHeight="100.0" prefWidth="250.0" styleClass="profile_menu_email"
-                  AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="170.0">
-         <Label layoutX="53.0" layoutY="24.0" prefHeight="30.0" prefWidth="65.0" text="Email:"
-                AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0"/>
-         <Button fx:id="edit_email_btn" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" text="Edit"
-                 AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0"/>
-         <TextField fx:id="new_email_fld" layoutX="45.0" layoutY="55.0" prefHeight="30.0" prefWidth="230.0"
-                    promptText="New email" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0"
-                    AnchorPane.rightAnchor="10.0"/>
-         <Label fx:id="current_email_lbl" layoutX="75.0" layoutY="14.0" prefHeight="30.0" prefWidth="120.0"
-                text="email 1st and last 2" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="10.0"/>
+      <AnchorPane layoutX="43.0" layoutY="204.0" prefHeight="100.0" prefWidth="250.0" styleClass="profile_menu_email" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="170.0">
+         <Label layoutX="53.0" layoutY="24.0" prefHeight="30.0" prefWidth="65.0" text="Email:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+         <Button fx:id="edit_email_btn" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEdit_email" text="Edit" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.0" />
+         <TextField fx:id="new_email_fld" layoutX="45.0" layoutY="55.0" prefHeight="30.0" prefWidth="230.0" promptText="New email" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+         <Label fx:id="current_email_lbl" layoutX="75.0" layoutY="14.0" prefHeight="30.0" prefWidth="120.0" text="email 1st and last 2" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="10.0" />
       </AnchorPane>
-      <Button fx:id="delete_account_btn" layoutX="74.0" layoutY="410.0" mnemonicParsing="false"
-              styleClass="delete_account_button" text="Delete Account" AnchorPane.topAnchor="410.0"/>
+      <Button fx:id="delete_account_btn" layoutX="525.0" layoutY="170.0" mnemonicParsing="false" onAction="#onDelete_account" styleClass="delete_account_button" text="Delete Account" AnchorPane.topAnchor="170.0" />
+      <AnchorPane layoutX="440.0" layoutY="60.0" prefHeight="100.0" prefWidth="250.0" styleClass="profile_menu_password" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <TextField fx:id="password_fld" layoutX="45.0" layoutY="55.0" prefHeight="30.0" prefWidth="230.0" promptText="Password" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <TextField fx:id="username_fld" layoutY="14.0" prefHeight="30.0" prefWidth="230.0" promptText="Username" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="15.0" />
+         </children>
+      </AnchorPane>
    </AnchorPane>
 </AnchorPane>
