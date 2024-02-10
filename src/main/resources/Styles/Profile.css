@@ -1,0 +1,105 @@
+.main_background{
+    -fx-background-color: #000000;
+}
+
+.left_menu_container{
+    /*-fx-background-color: linear-gradient(to bottom , #296978, #1198b6);*/
+    -fx-background-color: #212121;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-spacing: 20;
+    -fx-padding: 30;
+}
+.left_menu_container Button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #EEEEEE;
+    -fx-text-fill: #000000;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+    /*-fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
+}
+.left_menu_logout_container{
+    -fx-background-color: #212121;
+    -fx-background-radius: 0 0 10 10;
+    -fx-spacing: 20;
+    -fx-padding: 30;
+}
+.left_menu_logout_container Button{
+    -fx-pref-width: 120;
+    -fx-pref-height: 40;
+    -fx-background-color: #c7382d;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center;
+    /* -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);*/
+}
+
+.active_tab_button{
+    -fx-background-color: #1198b6;
+}
+
+.task_main_window FontAwesomeIconView{
+    -fx-fill: #1198b6;
+}
+
+.header_container{
+    -fx-background-color: #212121;
+    -fx-spacing: 350;
+    -fx-background-radius: 10px;
+}
+.header_container_welcome{
+    -fx-text-fill: #EEEEEE;
+    -fx-font-size: 1.6em;
+    -fx-pref-width: 230;
+}
+.header_container_date{
+    -fx-text-fill: #EEEEEE;
+    -fx-font-size: 1.6em;
+    -fx-pref-width: 140;
+    -fx-alignment: center;
+}
+
+
+.profile_menu_username{
+    -fx-background-color: #212121;
+    -fx-background-radius: 10px;
+}
+.profile_menu_username Label{
+    -fx-text-fill: #FFFFFF;
+}
+.profile_menu_username Button{
+    -fx-background-color: #1198b6;
+    -fx-text-fill: #FFFFFF;
+    -fx-pref-width: 50px;
+}
+
+.profile_menu_password{
+    -fx-background-color: #212121;
+    -fx-background-radius: 10px;
+}
+.profile_menu_password Label{
+    -fx-text-fill: #FFFFFF;
+}
+.profile_menu_password Button{
+    -fx-background-color: #1198b6;
+    -fx-text-fill: #FFFFFF;
+    -fx-pref-width: 50px;
+}
+
+.profile_menu_email{
+    -fx-background-color: #212121;
+    -fx-background-radius: 10px;
+}
+.profile_menu_email Label{
+    -fx-text-fill: #FFFFFF;
+}
+.profile_menu_email Button{
+    -fx-background-color: #1198b6;
+    -fx-text-fill: #FFFFFF;
+    -fx-pref-width: 50px;
+}
+
+.delete_account_button{
+    -fx-background-color: red;
+    -fx-text-fill: #FFFFFF;
+}
