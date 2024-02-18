@@ -1,6 +1,7 @@
 package com.plannerapp.plannerapp.Controllers.UserViews;
 
 import com.plannerapp.plannerapp.Scenes.SceneManager;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -37,6 +39,7 @@ public class DashboardController implements Initializable {
     public Label task_description_desc_lbl;
     public Label task_date_desc_lbl;
     public Label task_name_desc_lbl;
+    public ComboBox task_priority_cBox;
 
     private String header_username;
 
@@ -130,19 +133,28 @@ public class DashboardController implements Initializable {
         }
 
     }
+
+    // Setting the values at the ComboBox
+    public void set_priority_box_values(){
+        ObservableList<String> items = FXCollections.observableArrayList("High", "Medium", "Low");
+        task_priority_cBox.setItems(items);
+        task_priority_cBox.getSelectionModel().selectFirst();
+    }
+
     // Adding the task to the DB
     public void addTask(String taskName, String taskDescription, String taskDate){
         try(Connection conn = establishConnection()){
 
-            String insertSql = "INSERT INTO Tasks (Username, Task, \"Task Description\", \"Task Aim Date\", \"Task Completed Date\") VALUES (?, ?, ?, ?, ?)";
+            String insertSql = "INSERT INTO Tasks (Username, Task, \"Task Description\", Priority, \"Task Aim Date\", \"Task Completed Date\") VALUES (?, ?, ?, ?, ?, ?)";
             String taskCompleteDateDefault = "";
             try(PreparedStatement preparedStatement = conn.prepareStatement(insertSql)){
 
                 preparedStatement.setString(1, header_username.trim());         // Adding to DB - Username
                 preparedStatement.setString(2, taskName.trim());                // Adding to DB - Task name
                 preparedStatement.setString(3, taskDescription.trim());         // Adding to DB - Task Description
-                preparedStatement.setString(4, taskDate.trim());                // Adding to DB - Task Aim Date
-                preparedStatement.setString(5, taskCompleteDateDefault.trim()); // Adding to DB - Task Complete Date
+                preparedStatement.setString(4, task_priority_cBox.getSelectionModel().getSelectedItem().toString());
+                preparedStatement.setString(5, taskDate.trim());                // Adding to DB - Task Aim Date
+                preparedStatement.setString(6, taskCompleteDateDefault.trim()); // Adding to DB - Task Complete Date
 
                 int rowsEffected = preparedStatement.executeUpdate();
                 if(rowsEffected>0){
@@ -150,6 +162,7 @@ public class DashboardController implements Initializable {
                     add_task_description.setText("");
                     add_task_date.setValue(null);
                     populate_Tasks_List(header_username);
+                    populate_today_tasks_listview(header_username);
                     error_lbl.setVisible(false);
                 }
                 else{
@@ -331,5 +344,35 @@ public class DashboardController implements Initializable {
         }
     }
 
+    // Adding the today's tasks listview
+    public void populate_today_tasks_listview(String username){
+        String pattern = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDate current_date = LocalDate.now();
+        String formattedDate = current_date.format(formatter);
+        // Now we have the current date and the username
 
+        // Getting the data with said username and current date
+        try{
+            Connection conn = establishConnection();
+            String selectQuery = "SELECT Task FROM Tasks WHERE Username = ? AND \"Task Aim Date\" = ?";
+            try(PreparedStatement selectStatement = conn.prepareStatement(selectQuery)){
+                selectStatement.setString(1, username);
+                selectStatement.setString(2, formattedDate);
+
+                try(ResultSet resultSet = selectStatement.executeQuery()){
+                    ObservableList<String> data = FXCollections.observableArrayList();
+
+                    while(resultSet.next()){
+                        String value = resultSet.getString("Task");
+                        data.add(value);
+                    }
+                    today_task_listView.setItems(data);
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }
