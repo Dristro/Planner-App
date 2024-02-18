@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -21,11 +23,11 @@
       <Button fx:id="logout_btn" mnemonicParsing="false" onAction="#onLogout" text="Logout" />
    </VBox>
    <AnchorPane layoutX="174.0" layoutY="14.0" prefHeight="580.0" prefWidth="700.0" styleClass="main" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-      <HBox layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="670.0" styleClass="header_container" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="50.0" prefWidth="670.0" styleClass="header_container" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
          <Label fx:id="welcome_lbl" styleClass="header_container_welcome" text="Welcome label" />
          <Label fx:id="date_lbl" styleClass="header_container_date" text="Date label" />
       </HBox>
-      <VBox fillWidth="false" layoutX="66.0" layoutY="175.0" prefHeight="450.0" prefWidth="360.0" styleClass="current_task_container" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="70.0">
+      <VBox fillWidth="false" layoutX="66.0" layoutY="175.0" prefHeight="460.0" prefWidth="360.0" styleClass="current_task_container" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="60.0">
          <Label text="Current Tasks" />
          <ListView fx:id="current_tasks_listView" onMouseClicked="#onTask_selected" prefHeight="200.0" prefWidth="340.0" />
          <AnchorPane prefHeight="130.0" prefWidth="340.0" styleClass="task_description">
@@ -45,16 +47,19 @@
             </children>
          </HBox>
       </VBox>
-      <VBox fillWidth="false" layoutX="292.0" layoutY="118.0" prefHeight="240.0" prefWidth="290.0" styleClass="today_task_container" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+      <VBox fillWidth="false" layoutX="292.0" layoutY="118.0" prefHeight="240.0" prefWidth="290.0" styleClass="today_task_container" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
          <Label text="Today's Tasks" />
          <ListView fx:id="today_task_listView" prefHeight="170.0" prefWidth="270.0" />
       </VBox>
-      <VBox fillWidth="false" layoutX="390.0" layoutY="317.0" prefHeight="200.0" prefWidth="290.0" styleClass="add_task_container" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="320.0">
-         <Label styleClass="add_task_container_lbl" text="Add task" />
-         <TextField fx:id="add_task_fld" prefHeight="26.0" prefWidth="170.0" promptText="Task Name" />
-         <TextField fx:id="add_task_description" prefHeight="26.0" prefWidth="170.0" promptText="Task Description (Optional)" />
-         <DatePicker fx:id="add_task_date" prefHeight="26.0" prefWidth="170.0" promptText="Date of Completion" />
-         <Button fx:id="add_task_btn" mnemonicParsing="false" onAction="#getTaskData" prefHeight="26.0" prefWidth="60.0" text="Add" />
+      <VBox fillWidth="false" layoutX="390.0" layoutY="317.0" prefHeight="210.0" prefWidth="290.0" styleClass="add_task_container" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="310.0">
+         <TextField fx:id="add_task_fld" prefHeight="26.0" prefWidth="170.0" promptText="Task Name">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin></TextField>
+         <TextField fx:id="add_task_description" prefHeight="24.0" prefWidth="170.0" promptText="Task Description (Optional)" />
+         <DatePicker fx:id="add_task_date" prefHeight="24.0" prefWidth="170.0" promptText="Date of Completion" />
+         <ComboBox fx:id="task_priority_cBox" prefHeight="24.0" prefWidth="170.0" promptText="Task Priority" />
+         <Button fx:id="add_task_btn" mnemonicParsing="false" onAction="#getTaskData" prefHeight="24.0" prefWidth="60.0" text="Add" />
          <Label fx:id="error_lbl" prefHeight="17.0" prefWidth="200.0" styleClass="error_lbl" text="Error lbl" visible="false" />
       </VBox>
    </AnchorPane>

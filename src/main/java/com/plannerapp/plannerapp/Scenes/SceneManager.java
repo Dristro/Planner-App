@@ -32,6 +32,8 @@ public class SceneManager {
         DashboardController dashboardController = loader.getController();
         dashboardController.set_Header(username);
         dashboardController.populate_Tasks_List(username);
+        dashboardController.populate_today_tasks_listview(username);
+        dashboardController.set_priority_box_values();
     }
     // Tasks
     public void showTasks(String username){
