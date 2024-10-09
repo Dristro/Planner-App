@@ -143,6 +143,45 @@ public class DashboardController implements Initializable {
 
     // Adding the task to the DB
     public void addTask(String taskName, String taskDescription, String taskDate){
+/*
+        try(Connection conn = establishConnection()){
+            String insertQuery = "INSERT INTO Tasks (Username, Task, \"Task Description\", Priority, \"Task Aim Date\", \"Task Completed Date\") " +
+                    "SELECT ?, ?, ?, ?, ?, ? " +
+                    "FROM TASKS " +
+                    "ORDER BY CASE Priority WHEN 'High' THEN 1 WHEN 'Medium' THEN 2 WHEN 'Low' THEN 3 ELSE 4 END";
+            String taskCompletedDefault = "";
+
+            PreparedStatement insertStatement = conn.prepareStatement(insertQuery);
+            insertStatement.setString(1, header_username.trim());
+            insertStatement.setString(2, taskName);
+            insertStatement.setString(3, taskDescription);
+            insertStatement.setString(4, task_priority_cBox.getSelectionModel().getSelectedItem().toString());
+            insertStatement.setString(5, taskDate.trim());
+            insertStatement.setString(6, taskCompletedDefault.trim());
+
+
+            int rowsEffected = insertStatement.executeUpdate();
+            if(rowsEffected>0){
+                add_task_fld.setText("");
+                add_task_description.setText("");
+                add_task_date.setValue(null);
+                populate_Tasks_List(header_username);
+                populate_today_tasks_listview(header_username);
+                error_lbl.setVisible(false);
+            }
+            else{
+                error_lbl.setText("Error adding task");
+                error_lbl.setVisible(true);
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+            int error_code = e.getErrorCode();
+            System.out.println("SQLite error code: " + error_code);
+            error_lbl.setText("Error: try again");
+            error_lbl.setVisible(true);
+        }*/
+
         try(Connection conn = establishConnection()){
 
             String insertSql = "INSERT INTO Tasks (Username, Task, \"Task Description\", Priority, \"Task Aim Date\", \"Task Completed Date\") VALUES (?, ?, ?, ?, ?, ?)";
